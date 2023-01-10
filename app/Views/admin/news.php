@@ -168,11 +168,12 @@
         modal.find('select[name=id_category]').val(category)
         modal.find('input[name=author]').val(author)
 
-
-        // DecoupledEditor.create(document.querySelector('#ckeditor'))
-        //     .then(editor => {
-        //         editor.setData(content)
-        //     })
+        ClassicEditor.create(document.querySelector('#ckeditor'))
+            .then(editor => {
+                editor.setData(content)
+            }).catch(err => {
+                console.error(err.stack);
+            });
         // modal.find('textarea[name=content]').val(content)
         // modal.find('input[name=poster]').val(poster)
         modal.find('#myForm').attr('action', action);

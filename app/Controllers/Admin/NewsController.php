@@ -97,6 +97,7 @@ class NewsController extends BaseController
 				'content' => $_POST['content']
 			]);
 		}
+		session()->setFlashdata('success', 'News updated');
 		return redirect('admin/news');
 	}
 	public function delete($id)

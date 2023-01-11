@@ -29,6 +29,15 @@ class NewsController extends BaseController
 		return view('admin/news', $data);
 	}
 
+	public function get($id)
+	{
+		$data = $this->news->where('id_news', $id)->category();
+		$data = $this->news->first();
+		// echo '<pre>';
+		// print_r($data);
+		return $data['content'];
+	}
+
 	public function store()
 	{
 		$title = $_POST['title'];

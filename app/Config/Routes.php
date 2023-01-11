@@ -51,6 +51,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 	$routes->add('news/update/(:any)', 'Admin\NewsController::update/$1');
 	$routes->get('news/delete/(:any)', 'Admin\NewsController::delete/$1');
 	$routes->get('news/view/(:any)', 'Admin\NewsController::view/$1');
+	$routes->get('news/get/(:any)', 'Admin\NewsController::get/$1');
 
 	$routes->get('user', 'Admin\UserController::index');
 	$routes->add('user/store', 'Admin\UserController::store');

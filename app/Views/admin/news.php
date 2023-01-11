@@ -1,3 +1,7 @@
+<?php
+
+use CodeIgniter\Database\BaseUtils;
+?>
 <?= $this->extend('admin/layout/base'); ?>
 
 <?= $this->section('title') ?> <?= $title ?> <?= $this->endsection(); ?>
@@ -5,6 +9,7 @@
 
 <?= $this->section('css') ?>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
@@ -54,7 +59,7 @@
                                     </td>
                                     <td class="text-end">
                                         <a href="<?= base_url('admin/news/view/' . $news['id_news']) ?>" class="btn btn-success view"><i class="bi bi-eye"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-primary edit" data-action="<?= base_url('admin/news/update/' . $news['id_news']) ?>" data-title="<?= $news['title'] ?>" data-category="<?= $news['id_category']  ?>" data-author="<?= $news['author'] ?>" data-content="<?= $news['content'] ?>" data-poster="<?= $news['poster'] ?>"><i class="bi bi-pen"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-primary edit" data-action="<?= base_url('admin/news/update/' . $news['id_news']) ?>" data-get="<?= base_url('admin/news/get/' . $news['id_news']) ?>" data-title="<?= $news['title'] ?>" data-category="<?= $news['id_category']  ?>" data-author="<?= $news['author'] ?>" data-content="<?= $news['content'] ?>" data-poster="<?= $news['poster'] ?>"><i class="bi bi-pen"></i></a>
                                         <a href="javascript:void(0)" class="btn btn-danger delete" data-action="<?= base_url('admin/news/delete/' . $news['id_news']) ?>"><i class="bi bi-x"></i></a>
                                     </td>
                                 </tr>
@@ -99,7 +104,7 @@
                     </div>
                     <div class="form-group">
                         <label for="content">Content</label>
-                        <textarea type="text" name="content" id="ckeditor" class="form-control"></textarea>
+                        <textarea type="text" name="content" id="summernote" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="poster">Poster</label>
@@ -135,10 +140,9 @@
 <?= $this->endsection() ?>
 
 <?= $this->section('js'); ?>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
-
-<!-- <script src="<?= base_url() ?>/assets/js/pages/ckeditor.js"></script> -->
 <script>
     $(document).ready(function() {
         $('#table1').dataTable();
@@ -151,31 +155,33 @@
         modal.find('.save').text('Submit');
         modal.find('#myForm').attr('action', action);
         modal.modal('show')
+
     });
 
     $('.edit').on('click', function() {
         const modal = $('#myModal');
         var action = $(this).data('action');
+        var get = $(this).data('get');
         var title = $(this).data('title');
         var category = $(this).data('category');
         var author = $(this).data('author');
         var content = $(this).data('content');
         var poster = $(this).data('poster');
-        console.log(content);
+
+        // url = get;
+        // console.log(url);
+        // $.get(get, function(data, status) {
+        //     console.log('data :' + data + 'status ' + status);
+        //     $('textarea[name=content]').val(data)
+        // });
 
         modal.find('.modal-title').text('Update News');
         modal.find('input[name=title]').val(title)
         modal.find('select[name=id_category]').val(category)
         modal.find('input[name=author]').val(author)
-
-        ClassicEditor.create(document.querySelector('#ckeditor'))
-            .then(editor => {
-                editor.setData(content)
-            }).catch(err => {
-                console.error(err.stack);
-            });
         // modal.find('textarea[name=content]').val(content)
-        // modal.find('input[name=poster]').val(poster)
+        $('#summernote').summernote('code', content)
+
         modal.find('#myForm').attr('action', action);
         modal.find('.save').text('Save change');
         modal.modal('show');
@@ -191,11 +197,15 @@
 
     $('#myModal').on('hidden.bs.modal', function() {
         $('#myModal').find('form')[0].reset();
+        $('#summernote').summernote('reset');
     });
-    ClassicEditor
-        .create(document.querySelector('#ckeditor'))
-        .catch(error => {
-            console.error(error);
-        });
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+
+    $(".alert-dismiss").fadeTo(2000, 500).slideUp(500, function() {
+        $(".alert-dismiss").slideUp(500);
+    });
 </script>
+
 <?= $this->endsection() ?>

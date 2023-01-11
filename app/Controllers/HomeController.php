@@ -18,7 +18,7 @@ class HomeController extends BaseController
 		$news = $this->news->pagerNews();
 		$pager = service('pager');
 		$page = (int) (($this->request->getVar('page') !== null) ? $this->request->getVar('page') : 1) - 1;
-		$perPage = 2;
+		$perPage = 5;
 		$total = count($news);
 		$pager->makeLinks($page + 1, $perPage, $total);
 		$offset = $page * $perPage;
@@ -30,5 +30,10 @@ class HomeController extends BaseController
 	{
 		$data['news'] = $this->news->findWithSlug($slug);
 		return view('view_news', $data);
+	}
+
+	public function about()
+	{
+		return view('about');
 	}
 }

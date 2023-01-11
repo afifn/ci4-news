@@ -1,5 +1,4 @@
-<?php $pager = \Config\Services::pager(); ?>
-<?php $pager->setSurroundCount(2); ?>
+<?php $pager->setSurroundCount(2) ?>
 <nav>
     <ul class="pagination">
         <?php if ($pager->hasPrevious()) { ?>

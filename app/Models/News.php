@@ -62,6 +62,7 @@ class News extends Model
 		return $builder
 			->select('news.id_news, news.id_category, news.title, news.author, news.content, news.slug as slug, news.poster, news.created_at, category.name as category')
 			->join('category', 'news.id_category = category.id_category')
+			->orderBy('id_news', 'DESC')
 			->limit($perPager, $offset)
 			->get()
 			->getResult();

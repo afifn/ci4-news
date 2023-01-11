@@ -56,6 +56,17 @@ class News extends Model
 		return $this->findAll();
 	}
 
+	public function pagerNews($perPager = null, $offset = null)
+	{
+		$builder = $this->db->table('news');
+		return $builder
+			->select('news.id_news, news.id_category, news.title, news.author, news.content, news.slug as slug, news.poster, news.created_at, category.name as category')
+			->join('category', 'news.id_category = category.id_category')
+			->limit($perPager, $offset)
+			->get()
+			->getResult();
+	}
+
 	public function findWithCategory($id_news)
 	{
 		$this->db->table('news');

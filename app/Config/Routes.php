@@ -59,6 +59,9 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 	$routes->add('user/update/(:any)', 'Admin\UserController::update/$1');
 });
 
+// API
+$routes->resource('api/news');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

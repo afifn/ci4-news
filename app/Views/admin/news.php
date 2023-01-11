@@ -52,7 +52,7 @@ use CodeIgniter\Database\BaseUtils;
                                 <tr>
                                     <td><?= $no ?></td>
                                     <td><?= $news['title'] ?></td>
-                                    <td><?= $news['name'] ?></td>
+                                    <td><?= $news['category'] ?></td>
                                     <td><?= $news['author'] ?></td>
                                     <td>
                                         <img class="rounded img-thumbnail" style="height: 50px" src="<?= base_url('assets/upload/' . $news['poster'])  ?>">

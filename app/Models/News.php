@@ -51,7 +51,7 @@ class News extends Model
 	public function category()
 	{
 		$this->db->table('news');
-		$this->select('news.id_news, news.id_category, news.title, news.author, news.content, news.slug as slug, news.poster, category.name');
+		$this->select('news.id_news, news.id_category, news.title, news.author, news.content, news.slug as slug, news.poster, news.created_at, category.name as category');
 		$this->join('category', 'news.id_category = category.id_category');
 		return $this->findAll();
 	}

@@ -33,33 +33,40 @@
       <ul class="menu">
         <li class="sidebar-title">Menu</li>
 
-        <li class="sidebar-item ">
+        <li class="sidebar-item <?php site_url(uri_string()) ? 'active' : '' ?>">
           <a href="<?= base_url('admin/') ?>" class="sidebar-link">
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
           </a>
         </li>
 
-        <li class="sidebar-item ">
+        <li class="sidebar-item <?php base_url('admin/category') ? 'active' : '' ?>">
           <a href="<?= base_url('admin/category') ?>" class="sidebar-link">
             <i class="bi bi-stack"></i>
             <span>Category</span>
           </a>
         </li>
 
-        <li class="sidebar-item">
+        <li class="sidebar-item <?php site_url(uri_string()) ? 'active' : '' ?>">
           <a href="<?= base_url('admin/news') ?>" class="sidebar-link">
             <i class="bi bi-collection-fill"></i>
             <span>News</span>
           </a>
         </li>
 
-        <li class="sidebar-item">
+        <li class="sidebar-item <?php base_url('admin/user') ? 'active' : '' ?>">
           <a href="<?= base_url('admin/user') ?>" class="sidebar-link">
             <i class="bi bi-person"></i>
             <span>User</span>
           </a>
         </li>
+        <li class="sidebar-item <?php site_url('admin/setting') ? 'active' : '' ?>">
+          <a href="<?= base_url('admin/setting') ?>" class="sidebar-link">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+        <br>
 
         <!-- <li class="sidebar-item has-sub">
           <a href="#" class="sidebar-link">

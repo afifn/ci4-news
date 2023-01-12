@@ -41,7 +41,7 @@ class NewsController extends BaseController
 	public function store()
 	{
 		$title = $_POST['title'];
-		$slug =  $this->createSlug($title);
+		$slug = url_title($title, '-', true);
 
 		if (!$this->validate([
 			'poster' => [
@@ -71,7 +71,7 @@ class NewsController extends BaseController
 	public function update($id)
 	{
 		$title = $_POST['title'];
-		$slug = $this->createSlug($title);
+		$slug = url_title($title, '-', true);
 
 		$img = $this->request->getFile('poster');
 		if (!empty($_FILES['poster']['name'])) {
@@ -126,11 +126,5 @@ class NewsController extends BaseController
 			throw PageNotFoundException::forPageNotFound();
 		}
 		return view('admin/view_news', $data);
-	}
-
-	public static function createSlug($str, $delimiter = '-')
-	{
-		$slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
-		return $slug;
 	}
 }

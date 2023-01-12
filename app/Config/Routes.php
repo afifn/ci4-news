@@ -58,6 +58,9 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 	$routes->add('user/store', 'Admin\UserController::store');
 	$routes->get('user/delete/(:any)', 'Admin\UserController::delete/$1');
 	$routes->add('user/update/(:any)', 'Admin\UserController::update/$1');
+
+	$routes->get('setting', 'Admin\SettingController::index');
+	$routes->add('setting/update/(:any)', 'Admin\SettingController::update/$1');
 });
 
 // API

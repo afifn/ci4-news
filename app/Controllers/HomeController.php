@@ -4,13 +4,16 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\News;
+use App\Models\Setting;
 
 class HomeController extends BaseController
 {
 	protected $news;
+	protected $setting;
 	public function __construct()
 	{
 		$this->news = new News();
+		$this->setting = new Setting();
 	}
 	public function index()
 	{
@@ -23,20 +26,34 @@ class HomeController extends BaseController
 		$pager->makeLinks($page + 1, $perPage, $total);
 		$offset = $page * $perPage;
 		$data['newss'] = $this->news->pagerNews($perPage, $offset);
+
+		//setting
+		$data['setting'] = $this->setting->find();
 		return view('home', $data);
 	}
 
 	public function view($slug)
 	{
+		$news = $this->news->pagerNews();
+		$pager = service('pager');
+		$page = (int) (($this->request->getVar('page') !== null) ? $this->request->getVar('page') : 1) - 1;
+		$perPage = 5;
+		$total = count($news);
+		$pager->makeLinks($page + 1, $perPage, $total);
+		$offset = $page * $perPage;
+		$data['newss'] = $this->news->pagerNews($perPage, $offset);
+		$data['setting'] = $this->setting->find();
 		$data['news'] = $this->news->findWithSlug($slug);
 		return view('view_news', $data);
 	}
 
 	public function about()
 	{
-		$data = [
-			'title' => 'About Page'
-		];
-		return view('about', $data);
+		$data['setting'] = $this->setting->find();
+		$data['title'] = 'About Page';
+		$title     = "What's wrong with CSS?";
+		$url_title = url_title($title);
+		print_r($url_title);
+		// return view('about', $data);
 	}
 }

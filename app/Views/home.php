@@ -8,7 +8,7 @@
 <!-- Main Content-->
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-10 col-xl-7">
+        <div class="col-md-8 col-lg-12 col-xl-7">
             <!-- Post preview-->
             <?php foreach ($newss as $news) : ?>
                 <div class="row">
@@ -18,13 +18,12 @@
                             <!-- <h3 class="post-subtitle"><?= $news->content ?></h3> -->
                         </a>
                         <p class="post-meta">
-                            Posted by
                             <a href="#!"><?= $news->author ?></a>
-                            on <?= $news->created_at ?>
+                            <?= date('d M Y', strtotime($news->created_at)) ?>
                         </p>
                     </div>
                     <div class="col-4">
-                        <img style="height: 100px;" class="img-fluid rounded" src="<?= base_url('assets/upload/' . $news->poster) ?>" alt="Responsive image">
+                        <img class="img-fluid rounded thumbnail-padding" src="<?= base_url('assets/upload/' . $news->poster) ?>" alt="Responsive image">
                     </div>
                 </div>
                 <!-- Divider-->

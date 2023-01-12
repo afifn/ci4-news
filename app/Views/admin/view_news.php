@@ -15,13 +15,16 @@ Detail Data
                 <div class="card-body">
                     <?php foreach ($newss as $key => $news) : ?>
                         <h5 class="card-title"><?= $news['title'] ?></h5>
+
                         <p class="fw-light"><?= $news['category'] ?></p>
                         <img class="rounded w-100 mb-3" src="<?= base_url('assets/upload/' . $news['poster']) ?>" alt="">
                         <br>
                         <p class="card-text mb-2 text-justify">
                             <?= $news['content'] ?>
                         </p>
-                        <p class="text-end"><?= $news['author'] ?></p>
+                        <p class="text-end m-0"><?= $news['author'] ?></p>
+                        <p class="fw-light text-end"><?= date("d M Y", strtotime($news['created_at'])) ?></p>
+
 
                     <?php endforeach ?>
                 </div>

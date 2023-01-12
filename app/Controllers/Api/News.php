@@ -18,7 +18,15 @@ class News extends ResourceController
 	}
 	public function index()
 	{
-		$data = $this->news->category();
+		// $data = $this->news->paginate(2);
+		$news = $this->news->pagerNews();
+		$pager = service('pager');
+		$page = (int) (($this->request->getVar('page') !== null) ? $this->request->getVar('page') : 1) - 1;
+		$perPage = 10;
+		$total = count($news);
+		$pager->makeLinks($page + 1, $perPage, $total);
+		$offset = $page * $perPage;
+		$data['newss'] = $this->news->pagerNews($perPage, $offset);
 		return $this->respond($data, 200);
 	}
 
@@ -44,7 +52,7 @@ class News extends ResourceController
 			'poster' => $this->request->getPost('poster'),
 		];
 
-		$this->news->insert($data);
+		$this->news->save($data);
 		$response = [
 			'status' => '201',
 			'error' => false,

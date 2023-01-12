@@ -7,12 +7,12 @@ echo $this->endsection();
 ?>
 <?php
 echo $this->section('author');
-echo $news[0]['author'];
+echo 'Posted by ' . $news[0]['author'];
 echo $this->endsection();
 ?>
 <?php
 echo $this->section('date_post');
-echo $news[0]['created_at'];
+echo 'on ' . date('d M Y', strtotime($news[0]['created_at']));
 echo $this->endsection();
 ?>
 

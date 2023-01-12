@@ -34,6 +34,9 @@ class HomeController extends BaseController
 
 	public function about()
 	{
-		return view('about');
+		$data = [
+			'title' => 'About Page'
+		];
+		return view('about', $data);
 	}
 }

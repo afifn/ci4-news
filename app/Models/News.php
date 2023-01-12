@@ -71,7 +71,7 @@ class News extends Model
 	public function findWithCategory($id_news)
 	{
 		$this->db->table('news');
-		$this->select('news.title as title, news.author, news.content, news.poster, category.name as category');
+		$this->select('news.title as title, news.author, news.content, news.poster, news.created_at, category.name as category');
 		$this->join('category', 'news.id_category = category.id_category');
 		$this->where('news.id_news =' . $id_news);
 		return $this->find();

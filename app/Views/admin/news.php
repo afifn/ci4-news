@@ -55,7 +55,7 @@ use CodeIgniter\Database\BaseUtils;
                                     <td><?= $news['category'] ?></td>
                                     <td><?= $news['author'] ?></td>
                                     <td>
-                                        <img class="rounded img-thumbnail" style="height: 50px" src="<?= base_url('assets/upload/' . $news['poster'])  ?>">
+                                        <img class="rounded img-fluid" style="width: 60px;" src="<?= base_url('assets/upload/' . $news['poster'])  ?>">
                                     </td>
                                     <td class="text-end">
                                         <a href="<?= base_url('admin/news/view/' . $news['id_news']) ?>" class="btn btn-success view"><i class="bi bi-eye"></i></a>

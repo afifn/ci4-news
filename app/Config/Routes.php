@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'HomeController::index');
 $routes->get('view/(:any)', 'HomeController::view/$1');
 $routes->get('about', 'HomeController::about');
+$routes->get('contact', 'HomeController::contact');
 
 
 $routes->get('login', 'Admin\AuthController::index');
@@ -61,6 +62,8 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 
 	$routes->get('setting', 'Admin\SettingController::index');
 	$routes->add('setting/update/(:any)', 'Admin\SettingController::update/$1');
+	$routes->add('setting/upload', 'Admin\SettingController::store_gallery');
+	$routes->get('setting/delete-gallery/(:any)', 'Admin\SettingController::delete_gallery/$1');
 });
 
 // API

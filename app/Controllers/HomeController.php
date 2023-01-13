@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Gallery;
 use App\Models\News;
 use App\Models\Setting;
 
@@ -49,11 +50,16 @@ class HomeController extends BaseController
 
 	public function about()
 	{
+		$galleries = new Gallery();
+		$data['galleries'] = $galleries->findAll();
 		$data['setting'] = $this->setting->find();
 		$data['title'] = 'About Page';
-		$title     = "What's wrong with CSS?";
-		$url_title = url_title($title);
-		print_r($url_title);
-		// return view('about', $data);
+		return view('about', $data);
+	}
+
+	public function contact()
+	{
+
+		return view('contact');
 	}
 }

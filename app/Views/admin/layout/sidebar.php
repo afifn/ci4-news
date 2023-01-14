@@ -60,6 +60,12 @@
             <span>User</span>
           </a>
         </li>
+        <li class="sidebar-item <?php base_url('admin/contact') ? 'active' : '' ?>">
+          <a href="<?= base_url('admin/contact') ?>" class="sidebar-link">
+            <i class="bi bi-envelope"></i>
+            <span>Message</span>
+          </a>
+        </li>
         <li class="sidebar-item <?php site_url('admin/setting') ? 'active' : '' ?>">
           <a href="<?= base_url('admin/setting') ?>" class="sidebar-link">
             <i class="bi bi-gear"></i>

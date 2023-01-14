@@ -3,9 +3,11 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Contact;
 use App\Models\Gallery;
 use App\Models\News;
 use App\Models\Setting;
+use DateTime;
 
 class HomeController extends BaseController
 {
@@ -59,7 +61,20 @@ class HomeController extends BaseController
 
 	public function contact()
 	{
-
 		return view('contact');
+	}
+
+	public function addContact()
+	{
+		$contact = new Contact();
+		$post = $this->request->getPost();
+		$data = [
+			'name' => $post['name'],
+			'email' => $post['email'],
+			'message' => $post['message'],
+		];
+		$contact->insert($data);
+		session()->setFlashdata('success', 'Message has been sent');
+		return redirect('contact');
 	}
 }

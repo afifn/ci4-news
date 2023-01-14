@@ -8,13 +8,15 @@ class Contact extends Model
 {
 	protected $DBGroup              = 'default';
 	protected $table                = 'contacts';
-	protected $primaryKey           = 'id';
+	protected $primaryKey           = 'id_contact';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
 	protected $useSoftDelete        = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = [];
+	protected $allowedFields        = [
+		'name', 'email', 'message'
+	];
 
 	// Dates
 	protected $useTimestamps        = false;

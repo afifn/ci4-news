@@ -13,11 +13,6 @@
     $settings = new Setting();
     $data = $settings->find();
     echo '<title>' . $data[0]['title'] . '</title>';
-
-    $currentURL = current_url();
-    $params   = $_SERVER['QUERY_STRING'];
-    $fullURL = $currentURL . '?' . $params;
-    echo $fullURL;
     ?>
     <link rel="icon" type="image/x-icon" href="<?= base_url() ?>/assets/images/logo/favicon.png" />
     <!-- Font Awesome icons (free version)-->

@@ -18,16 +18,21 @@ class News extends ResourceController
 	}
 	public function index()
 	{
-		// $data = $this->news->paginate(2);
+		$defaultSize = 5;
 		$news = $this->news->pagerNews();
 		$pager = service('pager');
 		$page = (int) (($this->request->getVar('page') !== null) ? $this->request->getVar('page') : 1) - 1;
-		$perPage = 10;
+		$perPage = (int) (($this->request->getVar('size') !== null) ? $this->request->getVar('size') : $defaultSize);
 		$total = count($news);
-		$pager->makeLinks($page + 1, $perPage, $total);
+		$pager->makeLinks($page + 1, $perPage + 1, $total);
 		$offset = $page * $perPage;
 		$data['newss'] = $this->news->pagerNews($perPage, $offset);
-		return $this->respond($data, 200);
+		$response = [
+			'message' => 'news fetched successfully',
+			'error' => false,
+			'data' => $data['newss']
+		];
+		return $this->respond($response);
 	}
 
 	public function show($id = null)

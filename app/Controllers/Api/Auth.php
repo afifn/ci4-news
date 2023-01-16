@@ -35,7 +35,12 @@ class Auth extends ResourceController
 				$token = $this->generateToken($user);
 				$reponse = [
 					'message' => 'login successfully',
-					'token' => $token
+					'error' => false,
+					'loginResult' => [
+						'id_user' => $user['id_user'],
+						'name' => $user['email'],
+						'token' => $token
+					],
 				];
 				return $this->respond($reponse, 200);
 			}

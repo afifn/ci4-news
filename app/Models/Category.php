@@ -39,4 +39,12 @@ class Category extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function categoryHasMany()
+	{
+		$this->db->table('category');
+		$this->select('news.title, news.content, category.name as category');
+		$this->join('news', 'category.id_category = news.id_category');
+		return $this->findAll();
+	}
 }

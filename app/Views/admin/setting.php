@@ -16,17 +16,17 @@
         <div class="card">
             <div class="card-header">
                 <h5>Setting Web</h5>
+                <?php if (session()->getFlashdata('error')) : ?>
+                    <div class="alert alert-danger alert-dismiss fade show" role="alert">
+                        <?= session()->getFlashdata('error') ?>
+                    </div>
+                <?php endif; ?>
+                <?php if (session()->getFlashdata('success')) : ?>
+                    <div class="alert alert-success alert-dismiss fade show" role="alert">
+                        <?= session()->getFlashdata('success') ?>
+                    </div>
+                <?php endif; ?>
             </div>
-            <?php if (session()->getFlashdata('error')) : ?>
-                <div class="alert alert-danger alert-dismiss fade show" role="alert">
-                    <?= session()->getFlashdata('error') ?>
-                </div>
-            <?php endif; ?>
-            <?php if (session()->getFlashdata('success')) : ?>
-                <div class="alert alert-success alert-dismiss fade show" role="alert">
-                    <?= session()->getFlashdata('success') ?>
-                </div>
-            <?php endif; ?>
             <form action="<?= base_url('admin/setting/update/1') ?>" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="row">
@@ -73,17 +73,17 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Gallery</h5>
+                <?php if (session()->getFlashdata('error-gallery')) : ?>
+                    <div class="alert alert-danger alert-dismiss fade show" role="alert">
+                        <?= session()->getFlashdata('error-gallery') ?>
+                    </div>
+                <?php endif; ?>
+                <?php if (session()->getFlashdata('success-gallery')) : ?>
+                    <div class="alert alert-success alert-dismiss fade show" role="alert">
+                        <?= session()->getFlashdata('success-gallery') ?>
+                    </div>
+                <?php endif; ?>
             </div>
-            <?php if (session()->getFlashdata('error-gallery')) : ?>
-                <div class="alert alert-danger alert-dismiss fade show" role="alert">
-                    <?= session()->getFlashdata('error-gallery') ?>
-                </div>
-            <?php endif; ?>
-            <?php if (session()->getFlashdata('success-gallery')) : ?>
-                <div class="alert alert-success alert-dismiss fade show" role="alert">
-                    <?= session()->getFlashdata('success-gallery') ?>
-                </div>
-            <?php endif; ?>
             <div class="card-body">
                 <form action="<?= base_url('admin/setting/upload') ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">

@@ -62,6 +62,8 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 	$routes->add('user/update/(:any)', 'Admin\UserController::update/$1');
 
 	$routes->get('contact', 'Admin\ContactController::index');
+	$routes->get('contact/get/(:any)', 'Admin\ContactController::get/$1');
+	$routes->get('contact/delete/(:any)', 'Admin\ContactController::delete/$1');
 
 	$routes->get('setting', 'Admin\SettingController::index');
 	$routes->add('setting/update/(:any)', 'Admin\SettingController::update/$1');
@@ -70,8 +72,10 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 });
 
 // API
+$routes->addRedirect('api', '/');
 $routes->resource('api/news', ['filter' => 'JwtAuth']);
-$routes->post('api/login', 'Api\Login::index');
+$routes->post('api/login', 'Api\Auth::login');
+$routes->post('api/register', 'Api\Auth::register');
 
 /*
  * --------------------------------------------------------------------

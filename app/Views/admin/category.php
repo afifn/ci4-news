@@ -14,6 +14,11 @@
             <div class="card-header">
                 <a href="javascript:void(0)" class="btn btn-primary add" style="float: right;">Add Item</a>
                 <h5 class="card-title">Data Category</h5>
+                <?php if (session()->getFlashdata('message')) : ?>
+                    <div class="alert alert-success alert-dismiss fade show mt-4" role="alert">
+                        <?= session()->getFlashdata('message') ?>
+                    </div>
+                <?php endif ?>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -150,6 +155,9 @@
     });
     $('#myModal').on('hidden.bs.modal', function() {
         $('#myModal').find('form')[0].reset();
+    });
+    $('.alert-dismiss').fadeTo(2000, 500).slideUp(500, function() {
+        $('.alert-dismiss').slideUp(500);
     });
 </script>
 <?= $this->endSection(); ?>

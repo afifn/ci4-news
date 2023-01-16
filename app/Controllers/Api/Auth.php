@@ -9,7 +9,7 @@ use DateTime;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-class Login extends ResourceController
+class Auth extends ResourceController
 {
 	use ResponseTrait;
 
@@ -18,10 +18,10 @@ class Login extends ResourceController
 	 *
 	 * @return mixed
 	 */
-	public function index()
+	public function login()
 	{
 		$rules = [
-			'email' => 'required|string',
+			'email' => 'required|valid_email',
 			'password' => 'required|min_length[6]'
 		];
 		if (!$this->validate($rules)) {
@@ -63,6 +63,39 @@ class Login extends ResourceController
 		];
 		$token = JWT::encode($payload, $key, 'HS256');
 		return $token;
+	}
+
+	public function register()
+	{
+		$rules = [
+			'name' => 'required|string',
+			'email' => 'required|string|valid_email',
+			'password' => 'required|string'
+		];
+		$name = $this->request->getVar('name');
+		$email = $this->request->getVar('email');
+		$password = $this->request->getVar('password');
+
+		if (!$this->validate($rules)) {
+			return $this->fail($this->validator->getErrors());
+		}
+		$data = [
+			'name' => $name,
+			'email' => $email,
+			'password' => password_hash($password, PASSWORD_BCRYPT)
+		];
+		$model = new User();
+		$isEmail = $model->where('email', $this->request->getVar('email'))->first();
+		if ($isEmail) {
+			$reponse = [
+				'message' => 'email has been used',
+				'error' => true
+			];
+			return $this->respond($reponse);
+		} else {
+			$model->insert($data);
+			return $this->respond(['message' => 'success', 'error' => false]);
+		}
 	}
 
 	/**

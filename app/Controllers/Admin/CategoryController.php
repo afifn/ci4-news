@@ -28,6 +28,7 @@ class CategoryController extends BaseController
 			'name' => $name,
 			'slug' => $slug
 		]);
+		session()->setFlashdata('message', 'Category created');
 		return redirect('admin/category');
 	}
 
@@ -39,11 +40,13 @@ class CategoryController extends BaseController
 			'name' => $name,
 			'slug' => $slug
 		]);
+		session()->setFlashdata('message', 'Category updated');
 		return redirect('admin/category');
 	}
 	public function delete($id)
 	{
 		$this->category->delete($id);
+		session()->setFlashdata('message', 'Category deleted');
 		return redirect()->to('/admin/category');
 	}
 

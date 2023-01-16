@@ -12,9 +12,11 @@ Contact Us
     </style>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="alert alert-success alert-dismissible alert-dismiss fade show" role="dialog">
-                <p>Ini Alert</p>
-            </div>
+            <?php if (session()->getFlashdata('message')) : ?>
+                <div class="alert alert-success alert-dismissible alert-dismiss fade show" role="dialog">
+                    <?= session()->getFlashdata('message') ?>
+                </div>
+            <?php endif ?>
             <form action="<?= base_url('contact-add') ?>" method="post">
                 <div class="form-group mb-2">
                     <label for="name">Name</label>

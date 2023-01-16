@@ -18,19 +18,19 @@
             <div class="card-header">
                 <a href="javascript:void(0)" data-action="<?= base_url('admin/user/store') ?>" type="button" class="btn btn-primary add" style="float: right;">Add Item</a>
                 <h5 class="card-title">Data user</h5>
+                <?php if (session()->getFlashdata('error')) : ?>
+                    <div class="alert alert-danger alert-dismiss fade show mt-4" role="alert">
+                        <?= session()->getFlashdata('error') ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
+                <?php if (session()->getFlashdata('success')) : ?>
+                    <div class="alert alert-success alert-dismiss fade show mt-4" role="alert">
+                        <?= session()->getFlashdata('success') ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
             </div>
-            <?php if (session()->getFlashdata('error')) : ?>
-                <div class="alert alert-danger alert-dismissable fade show" role="alert">
-                    <?= session()->getFlashdata('error') ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php endif ?>
-            <?php if (session()->getFlashdata('success')) : ?>
-                <div class="alert alert-success alert-dismissable fade show" role="alert">
-                    <?= session()->getFlashdata('success') ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php endif ?>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -161,6 +161,9 @@
 
         modal.find('form').attr('action', action);
         modal.modal('show');
+    });
+    $('.alert-dismiss').fadeTo(2000, 500).slideUp(500, function() {
+        $('.alert-dismiss').slideUp(500);
     });
 </script>
 <?= $this->endsection(); ?>

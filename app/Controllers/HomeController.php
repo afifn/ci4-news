@@ -74,7 +74,7 @@ class HomeController extends BaseController
 			'message' => $post['message'],
 		];
 		$contact->insert($data);
-		session()->setFlashdata('success', 'Message has been sent');
+		session()->setFlashdata('message', 'Message has been sent');
 		return redirect('contact');
 	}
 }

@@ -74,29 +74,29 @@ class SettingController extends BaseController
 
 	public function store_gallery()
 	{
-		$gallery = new Gallery();
-		// if (!empty($upload['file_upload'])) {
-		// 	if ($this->validate([
-		// 		'file_upload' => [
-		// 			'rules' => 'uploaded[file_upload]'
-		// 				. '|mime_in[file_upload,image/jpeg, image/jpg, image/png, image/svg, image/webp]'
-		// 		]
-		// 	])) {
-		// 		session()->setFlashdata('error-gallery', $this->validator->listErrors());
-		// 		return redirect()->back()->withInput();
-		// 	}
-		// 	foreach ($upload['upload_file'] as $up) {
-		// 		print_r($up);
-		// 		$title = $up->getName();
-		// 		$data = [
-		// 			'title' => $title,
-		// 			'created_at' => date('d-m-Y')
-		// 		];
-		// 		$up->move($this->filePath);
-		// 		$gallery->insert($data);
-		// 	}
-		// }
+		$rules = [
+			'file_upload' => [
+				'rules' => [
+					'uploaded[file_upload]',
+					'is_image[file_upload]',
+					'mime_in[file_upload, image/jpg, image/jpeg, image/png, image/webp]'
+				],
+			],
+		];
+		if (!$this->validate($rules)) {
+			session()->setFlashdata('error-gallery', $this->validator->listErrors());
+			return redirect()->back()->withInput();
+		}
 		if ($this->request->getFileMultiple('file_upload')) {
+			if ($this->validate([
+				'file_upload' => [
+					'rules' => 'uploaded[file_upload]'
+						. '|mime_in[file_upload,image/jpeg, image/jpg, image/png, image/svg, image/webp]'
+				]
+			])) {
+				session()->setFlashdata('error-gallery', $this->validator->listErrors());
+				return redirect()->back()->withInput();
+			}
 			foreach ($this->request->getFileMultiple('file_upload') as $file) {
 				$title = $file->getName();
 				$file->move($this->filePath);
@@ -116,7 +116,7 @@ class SettingController extends BaseController
 		$findId = $gallery->where('id_gallery', $id)->find();
 		@unlink($this->filePath . $findId[0]['title']);
 		$gallery->delete($id);
-		session()->setFlashdata('success', 'Gallery deleted');
+		session()->setFlashdata('success-gallery', 'Gallery deleted');
 		return redirect('admin/setting');
 	}
 }

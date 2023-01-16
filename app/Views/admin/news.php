@@ -20,17 +20,17 @@ use CodeIgniter\Database\BaseUtils;
                 <a href="javascript:void(0)" data-action="<?= base_url('admin/news/store') ?>" class="btn btn-primary add" style="float: right;">Add Item</a>
                 <h5 class="card-title">Data News</h5>
 
+                <?php if (session()->getFlashdata('error')) : ?>
+                    <div class="alert alert-danger alert-dismiss fade show mt-4" role="alert">
+                        <?= session()->getFlashdata('error') ?>
+                    </div>
+                <?php endif; ?>
+                <?php if (session()->getFlashdata('success')) : ?>
+                    <div class="alert alert-success alert-dismiss fade show mt-4" role="alert">
+                        <?= session()->getFlashdata('success') ?>
+                    </div>
+                <?php endif; ?>
             </div>
-            <?php if (session()->getFlashdata('error')) : ?>
-                <div class="alert alert-danger alert-dismiss fade show" role="alert">
-                    <?= session()->getFlashdata('error') ?>
-                </div>
-            <?php endif; ?>
-            <?php if (session()->getFlashdata('success')) : ?>
-                <div class="alert alert-success alert-dismiss fade show" role="alert">
-                    <?= session()->getFlashdata('success') ?>
-                </div>
-            <?php endif; ?>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped" id="table1">

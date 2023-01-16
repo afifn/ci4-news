@@ -85,4 +85,14 @@ class News extends Model
 		$this->where('news.slug', $slug);
 		return $this->find();
 	}
+
+	public function findCategoryByName($name)
+	{
+		$this->db->table('news');
+		$this->select('news.id_news, news.title, category.name as category, news.author, news.content, news.poster');
+		$this->join('category', 'news.id_category = category.id_category');
+		$this->where('category.name', $name);
+		$this->orderBy('id_news', 'DESC');
+		return $this->findAll();
+	}
 }

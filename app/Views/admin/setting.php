@@ -88,7 +88,7 @@
                 <form action="<?= base_url('admin/setting/upload') ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="gallery">Gallery</label>
-                        <input type="file" name="file_upload[]" multiple class="form-control filepond">
+                        <input type="file" name="file_upload[]" multiple class="form-control filepond" required>
                     </div>
                     <div class="col-12 d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">Upload</button>
@@ -97,7 +97,7 @@
                 <br>
                 <div class="row gallery">
                     <?php foreach ($galleries as $gallery) : ?>
-                        <div class="col-6 col-sm-6 col-lg-3 mt-2 mt-md-0 mb-md-0 mb-2">
+                        <div class="col-6 col-sm-6 col-lg-3 mt-2 mb-2">
                             <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#galleryModal-<?= $gallery['id_gallery'] ?>" id="gallery">
                                 <img class="w-100" src="<?= base_url('assets/upload/' . $gallery['title']) ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" />
                             </a>

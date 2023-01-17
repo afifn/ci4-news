@@ -75,6 +75,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 $routes->addRedirect('api', '/');
 $routes->resource('api/news', ['filter' => 'JwtAuth']);
 $routes->resource('api/category');
+
 $routes->post('api/login', 'Api\Auth::login');
 $routes->post('api/register', 'Api\Auth::register');
 

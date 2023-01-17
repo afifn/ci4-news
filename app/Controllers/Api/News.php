@@ -57,7 +57,9 @@ class News extends ResourceController
 			'poster' => $this->request->getPost('poster'),
 		];
 
+
 		$this->news->save($data);
+		$data['id_news'] = $this->news->getInsertID();
 		$response = [
 			'status' => '201',
 			'error' => false,

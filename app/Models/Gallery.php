@@ -41,4 +41,11 @@ class Gallery extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function getGallery()
+	{
+		$this->db->table('gallery');
+		$this->select('gallery.id_gallery, gallery.title as image, gallery.created_at');
+		return $this->findAll();;
+	}
 }

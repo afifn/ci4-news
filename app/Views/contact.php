@@ -20,15 +20,15 @@ Contact Us
             <form action="<?= base_url('contact-add') ?>" method="post">
                 <div class="form-group mb-2">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" required>
                 </div>
                 <div class="form-group mb-2">
                     <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control">
+                    <input type="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group mb-2">
                     <label for="message">Message</label>
-                    <textarea type="text" id="editor" rows="10" name="message" class="form-control ck-editor__editable_inline"></textarea>
+                    <textarea type="text" rows="10" name="message" class="form-control ck-editor__editable_inline" required></textarea>
                 </div>
                 <div class="justify-content-end">
                     <button class="btn btn-primary">Send</button>

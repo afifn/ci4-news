@@ -106,7 +106,7 @@ Contact
             dataType: "JSON",
             success: function(data) {
                 console.log(data.name);
-                $('#tableContact').append("<tr> <th>Name</th> <td class=" + "px-2" + ">:</td> <td>" + data.name + "</td> </tr> <tr> <th>Email</th> <td class=" + "px-2" + ">:</td> <td>" + data.email + "</td> </tr> <tr> <th class=" + "align-baseline" + ">Message</th> <td class=" + "px-2 align-text-top" + ">:</td> <td class=" + "align-baseline" + "><p>" + data.message + "</p></td> </tr>")
+                $('#tableContact').append("<tr> <th>Name</th> <td class=" + "px-2" + ">:</td> <td>" + data.name + "</td> </tr> <tr> <th>Email</th> <td class=" + "px-2" + ">:</td> <td>" + data.email + "</td> </tr> <tr> <th>Message</th> <td class=" + "px-2" + ">:</td> <td>" + data.message + "</td> </tr>")
             }
         })
         modal.modal('show');

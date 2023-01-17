@@ -74,41 +74,31 @@ class SettingController extends BaseController
 
 	public function store_gallery()
 	{
-		$rules = [
-			'file_upload' => [
-				'rules' => [
-					'uploaded[file_upload]',
-					'is_image[file_upload]',
-					'mime_in[file_upload, image/jpg, image/jpeg, image/png, image/webp]'
-				],
-			],
-		];
-		if (!$this->validate($rules)) {
-			session()->setFlashdata('error-gallery', $this->validator->listErrors());
-			return redirect()->back()->withInput();
-		}
+		$gallery = new Gallery();
 		if ($this->request->getFileMultiple('file_upload')) {
 			if ($this->validate([
 				'file_upload' => [
-					'rules' => 'uploaded[file_upload]'
-						. '|mime_in[file_upload,image/jpeg, image/jpg, image/png, image/svg, image/webp]'
+					'rules' => 'uploaded[favicon]'
+						. '|mime_in[favicon,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
 				]
 			])) {
 				session()->setFlashdata('error-gallery', $this->validator->listErrors());
 				return redirect()->back()->withInput();
-			}
-			foreach ($this->request->getFileMultiple('file_upload') as $file) {
-				$title = $file->getName();
-				$file->move($this->filePath);
-				$data = [
-					'title' => $title,
-					'created_at' => date('d-m-Y'),
-				];
-				$gallery->insert($data);
+			} else {
+
+				foreach ($this->request->getFileMultiple('file_upload') as $file) {
+					$title = $file->getName();
+					$file->move($this->filePath);
+					$data = [
+						'title' => $title,
+						'created_at' => date('d-m-Y'),
+					];
+					$gallery->insert($data);
+				}
+				session()->setFlashdata('success-gallery', 'Gallery uploaded');
+				return redirect('admin/setting');
 			}
 		}
-		session()->setFlashdata('success-gallery', 'Gallery uploaded');
-		return redirect('admin/setting');
 	}
 	public function delete_gallery($id)
 	{
